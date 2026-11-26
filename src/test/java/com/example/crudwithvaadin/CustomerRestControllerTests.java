@@ -129,4 +129,32 @@ public class CustomerRestControllerTests {
 				.andExpect(status().isNotFound())
 				.andExpect(jsonPath("$.status", is(404)));
 	}
+
+	@Test
+	void shouldReturnDynamicCustomerStatistics() throws Exception {
+		long initialCount = repository.count();
+
+		mockMvc.perform(get("/api/customers/statistics"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.totalCustomers", is((int) initialCount)))
+				.andExpect(jsonPath("$.contributorStudentId", is("79822")));
+
+		String body = """
+				{
+				  "firstName": "Ada",
+				  "lastName": "Lovelace",
+				  "email": "ada.lovelace@example.com"
+				}
+				""";
+
+		mockMvc.perform(post("/api/customers")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(body))
+				.andExpect(status().isCreated());
+
+		mockMvc.perform(get("/api/customers/statistics"))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.totalCustomers", is((int) initialCount + 1)))
+				.andExpect(jsonPath("$.contributorStudentId", is("79822")));
+	}
 }

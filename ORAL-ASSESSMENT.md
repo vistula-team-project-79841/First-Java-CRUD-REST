@@ -47,15 +47,16 @@ The Vaadin editor performs similar checks with a `Binder`. REST validation and U
 
 ## Explain the partner statistics endpoint
 
-The partner contribution must expose `GET /api/customers/statistics`. Its customer count must come from `repository.count()`, so it changes when customers are created or deleted. `contributorStudentId` identifies the student who authored that Pull Request.
+`CustomerStatisticsController` (contributed by student `79822` in Pull Request #1) exposes `GET /api/customers/statistics`. Its `totalCustomers` count comes dynamically from `repository.count()`, so it changes whenever customers are created or deleted. `contributorStudentId` identifies the partner (`"79822"`) who authored that Pull Request.
 
-The endpoint in this repository must be authored by student `79822`. The endpoint contributed to the partner repository by student `79841` must identify `79841`. GitHub Pull Request history is part of the assignment evidence.
+Similarly, the endpoint contributed to the partner repository by student `79841` identifies `"79841"`. Both merged Pull Requests are visible in the GitHub Pull Request history.
 
 ## Files to locate during the assessment
 
 - Entity: `src/main/java/com/example/crudwithvaadin/Customer.java`
 - Repository: `src/main/java/com/example/crudwithvaadin/CustomerRepository.java`
 - REST CRUD: `src/main/java/com/example/crudwithvaadin/CustomerRestController.java`
+- Statistics endpoint (partner PR): `src/main/java/com/example/crudwithvaadin/CustomerStatisticsController.java`
 - Application info: `src/main/java/com/example/crudwithvaadin/InfoRestController.java`
 - UI list and filter: `src/main/java/com/example/crudwithvaadin/MainView.java`
 - UI form: `src/main/java/com/example/crudwithvaadin/CustomerEditor.java`

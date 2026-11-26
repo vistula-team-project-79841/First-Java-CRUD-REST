@@ -32,7 +32,7 @@ Open the Vaadin interface at [http://localhost:8080](http://localhost:8080). The
 | `PUT` | `/api/customers/{id}` | `200 OK` | Update a customer |
 | `DELETE` | `/api/customers/{id}` | `204 No Content` | Delete a customer |
 | `GET` | `/api/info` | `200 OK` | Return the student ID, application name, and version |
-| `GET` | `/api/customers/statistics` | `200 OK` | Return a dynamic customer count after the partner contribution is merged |
+| `GET` | `/api/customers/statistics` | `200 OK` | Return dynamic customer count and contributor student ID (`79822`) |
 
 Invalid JSON or customer data returns `400 Bad Request`. A request for a missing customer returns `404 Not Found`.
 
@@ -68,10 +68,11 @@ Delete customer `6`:
 curl -i -X DELETE http://localhost:8080/api/customers/6
 ```
 
-Read application information:
+Read application information and dynamic customer statistics:
 
 ```bash
 curl http://localhost:8080/api/info
+curl http://localhost:8080/api/customers/statistics
 ```
 
 ## Test evidence
@@ -82,21 +83,19 @@ The screenshots in [`doc`](doc) were captured from the running local application
 - [`02-get-filter-info.png`](doc/02-get-filter-info.png): application info, customer list, and name filter
 - [`03-post-put-delete.png`](doc/03-post-put-delete.png): successful create, read, update, and delete requests
 - [`04-error-responses.png`](doc/04-error-responses.png): `400 Bad Request` and `404 Not Found`
-
-The statistics screenshot will be added only after the partner's Pull Request has been reviewed and merged.
+- [`05-statistics-endpoint.png`](doc/05-statistics-endpoint.png): dynamic `GET /api/customers/statistics` count (`5 -> 6 -> 5`) after create and delete
 
 ## Collaboration Pull Requests
 
-- Contribution by student `79841` to the partner repository: [Pull Request #1](https://github.com/vistula-team-project-79822/First-Java-CRUD-REST/pull/1) is open and awaiting partner review and merge.
-- Contribution by student `79822` to this repository: no Pull Request is currently available. It must be genuinely authored by the partner, reviewed, and merged before submission.
-
-Both merged Pull Request links and the statistics screenshot are required before this repository is ready for Platon submission.
+- Contribution by student `79841` to the partner repository (`vistula-team-project-79822/First-Java-CRUD-REST`): [Merged Pull Request #1](https://github.com/vistula-team-project-79822/First-Java-CRUD-REST/pull/1)
+- Contribution by student `79822` to this repository (`vistula-team-project-79841/First-Java-CRUD-REST`): [Merged Pull Request #1](https://github.com/vistula-team-project-79841/First-Java-CRUD-REST/pull/1)
 
 ## Code guide
 
 - `Customer` is the JPA entity stored in H2.
 - `CustomerRepository` provides CRUD operations and the derived name-filter query.
 - `CustomerRestController` maps HTTP requests to repository operations and returns the required status codes.
+- `CustomerStatisticsController` (contributed by student `79822`) exposes dynamic customer statistics via `repository.count()`.
 - `InfoRestController` exposes application metadata from configuration.
 - `MainView` and `CustomerEditor` implement the Vaadin interface.
 - `CrudWithVaadinApplication` starts Spring Boot and inserts sample data when the database is empty.
