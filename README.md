@@ -87,7 +87,7 @@ The statistics screenshot will be added only after the partner's Pull Request ha
 
 ## Collaboration Pull Requests
 
-- Contribution by student `79841` to the partner repository: local branch `feature-statistics` is prepared. The Pull Request link will be added after it is opened and merged by the partner.
+- Contribution by student `79841` to the partner repository: [Pull Request #1](https://github.com/vistula-team-project-79822/First-Java-CRUD-REST/pull/1) is open and awaiting partner review and merge.
 - Contribution by student `79822` to this repository: no Pull Request is currently available. It must be genuinely authored by the partner, reviewed, and merged before submission.
 
 Both merged Pull Request links and the statistics screenshot are required before this repository is ready for Platon submission.
